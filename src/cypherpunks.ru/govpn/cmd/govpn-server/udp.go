@@ -196,7 +196,11 @@ func startUDP() {
 					peersLock.Unlock()
 					peersByIDLock.Unlock()
 					kpLock.Unlock()
-					govpn.Printf(`[peer-created bind="%s" peer="%s"]`, *bindAddr, peer.ID.String())
+					govpn.Printf(
+						`[peer-created bind="%s" peer="%s"]`,
+						*bindAddr,
+						peer.ID.String(),
+					)
 				}(addr, peer)
 			}
 			udpBufs <- buf
