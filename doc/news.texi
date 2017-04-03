@@ -3,6 +3,14 @@
 
 See also this page @ref{Новости, on russian}.
 
+@node Release 7.3
+@section Release 7.3
+@itemize
+@item Fixed seldom possible segmentation fault on the server during
+rehandshake.
+@item Dependant cryptographic libraries are updated.
+@end itemize
+
 @node Release 7.2
 @section Release 7.2
 @itemize

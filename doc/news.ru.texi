@@ -1,6 +1,14 @@
 @node Новости
 @section Новости
 
+@node Релиз 7.3
+@subsection Релиз 7.3
+@itemize
+@item Исправлена редкая возможная ошибка падения сервера во время
+rehandshake процедуры.
+@item Обновлены зависимые криптографические библиотеки.
+@end itemize
+
 @node Релиз 7.2
 @subsection Релиз 7.2
 @itemize
