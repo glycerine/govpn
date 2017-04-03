@@ -99,10 +99,18 @@ func handleTCP(conn net.Conn) {
 		peersByIDLock.RLock()
 		addrPrev, exists := peersByID[*peer.ID]
 		peersByIDLock.RUnlock()
+		var peerPrev *PeerState
 		if exists {
 			peersLock.Lock()
-			peers[addrPrev].terminator <- struct{}{}
-			tap = peers[addrPrev].tap
+			peerPrev = peers[addrPrev]
+			if peerPrev == nil {
+				exists = false
+				peersLock.Unlock()
+			}
+		}
+		if exists {
+			peerPrev.terminator <- struct{}{}
+			tap = peerPrev.tap
 			ps = &PeerState{
 				peer:       peer,
 				tap:        tap,

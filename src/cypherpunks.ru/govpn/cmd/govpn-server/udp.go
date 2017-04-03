@@ -136,12 +136,20 @@ func startUDP() {
 			peersByIDLock.RLock()
 			addrPrev, exists = peersByID[*peer.ID]
 			peersByIDLock.RUnlock()
+			var peerPrev *PeerState
 			if exists {
 				peersLock.Lock()
-				peers[addrPrev].terminator <- struct{}{}
+				peerPrev = peers[addrPrev]
+				if peerPrev == nil {
+					exists = false
+					peersLock.Unlock()
+				}
+			}
+			if exists {
+				peerPrev.terminator <- struct{}{}
 				psNew := &PeerState{
 					peer:       peer,
-					tap:        peers[addrPrev].tap,
+					tap:        peerPrev.tap,
 					terminator: make(chan struct{}),
 				}
 				go func(peer *govpn.Peer, tap *govpn.TAP, terminator chan struct{}) {
