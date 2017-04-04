@@ -51,6 +51,7 @@ rm utils/makedist.sh
 find . -name .git -type d | xargs rm -fr
 find . -name .gitignore -delete
 rm .gitmodules
+rm -r ports
 
 cd ..
 tar cvf govpn-"$release".tar govpn-"$release"
