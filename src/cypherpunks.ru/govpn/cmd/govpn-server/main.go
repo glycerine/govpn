@@ -132,7 +132,11 @@ MainCycle:
 				needsDeletion = ps.peer.LastPing.Add(timeout).Before(now)
 				ps.peer.BusyR.Unlock()
 				if needsDeletion {
-					govpn.Printf(`[peer-delete bind="%s" peer="%s"]`, *bindAddr, ps.peer)
+					govpn.Printf(
+						`[peer-delete bind="%s" peer="%s"]`,
+						*bindAddr,
+						ps.peer.ID.String(),
+					)
 					delete(peers, addr)
 					delete(knownPeers, addr)
 					delete(peersByID, *ps.peer.ID)
