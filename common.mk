@@ -1,6 +1,6 @@
 .PHONY: doc
 
-LDFLAGS = -X cypherpunks.ru/govpn.Version=$(VERSION)
+LDFLAGS = -X govpn.Version=$(VERSION)
 PREFIX ?= /usr/local
 BINDIR = $(DESTDIR)$(PREFIX)/bin
 INFODIR = $(DESTDIR)$(PREFIX)/info
@@ -10,16 +10,16 @@ DOCDIR = $(DESTDIR)$(PREFIX)/share/doc/govpn
 all: govpn-client govpn-server govpn-verifier
 
 govpn-client:
-	GOPATH=$(GOPATH) go build -ldflags "$(LDFLAGS)" cypherpunks.ru/govpn/cmd/govpn-client
+	go build -ldflags "$(LDFLAGS)" github.com/glycerine/govpn/govpn/cmd/govpn-client
 
 govpn-server:
-	GOPATH=$(GOPATH) go build -ldflags "$(LDFLAGS)" cypherpunks.ru/govpn/cmd/govpn-server
+	go build -ldflags "$(LDFLAGS)" github.com/glycerine/govpn/govpn/cmd/govpn-server
 
 govpn-verifier:
-	GOPATH=$(GOPATH) go build -ldflags "$(LDFLAGS)" cypherpunks.ru/govpn/cmd/govpn-verifier
+	go build -ldflags "$(LDFLAGS)" github.com/glycerine/govpn/govpn/cmd/govpn-verifier
 
 bench:
-	GOPATH=$(GOPATH) go test -benchmem -bench . cypherpunks.ru/govpn/...
+	go test -benchmem -bench . github.com/glycerine/govpn/govpn/...
 
 clean:
 	rm -f govpn-client govpn-server govpn-verifier
